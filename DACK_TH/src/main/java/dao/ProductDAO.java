@@ -11,6 +11,7 @@ import java.util.List;
 import model.Product;
 import model.Image;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -23,6 +24,17 @@ public class ProductDAO {
     
     public void setTemplate(JdbcTemplate template) {
         this.template = template;
+    }
+    
+    public Product GetProduct(int idPro) {
+        try{
+        String sql = "select * from product where id=?";
+        return template.queryForObject(sql, new Object[]{idPro}, new BeanPropertyRowMapper<Product>(Product.class));
+        } catch(EmptyResultDataAccessException e)
+        {
+            return null;
+        }
+        
     }
     
     public List<Product> LayDanhSachProducts() {

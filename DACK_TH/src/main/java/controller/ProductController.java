@@ -47,4 +47,16 @@ public class ProductController {
         return "listProduct";
         
     }
+    
+    @RequestMapping(value = "/product/details", method = RequestMethod.GET)
+    public String ProductDetails(ModelMap map, @RequestParam("idPro") int idPro){
+        Product p = daoPro.GetProduct(idPro);
+        List<Image> listImg = daoPro.LayImage(idPro);
+        p.getImgs().setListImg(listImg);
+        int countImage = listImg.size();
+        map.addAttribute("p", p);
+        map.addAttribute("countImg", countImage);
+        return "productDetails";
+        
+    }
 }
