@@ -30,7 +30,7 @@ public class ProductController {
     @Autowired
     ProductDAO daoPro;
     
-    @RequestMapping(value = "/product/danhsach")
+    @RequestMapping(value = "/product/list")
     public String LayDanhSachProducts(ModelMap map){
         logger.info("Lay ds product");
         List<Product> lstPro = daoPro.LayDanhSachProducts();

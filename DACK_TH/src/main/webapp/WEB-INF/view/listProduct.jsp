@@ -32,6 +32,7 @@
     </head>
     <body>
         <div class="container">
+            <img src="./Images/VH1.jpg" >
             <h1>Danh sách sản phẩm</h1>
             <div class="scroll">
                 <table class="table">
