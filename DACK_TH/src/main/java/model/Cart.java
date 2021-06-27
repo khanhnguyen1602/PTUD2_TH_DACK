@@ -16,6 +16,15 @@ public class Cart implements Serializable{
     private int idUser;
     private int idProduct;
     private int quantity;
+    private Product product = new Product();
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
     public Cart() {
     }

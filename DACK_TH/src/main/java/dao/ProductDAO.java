@@ -8,6 +8,7 @@ package dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import model.Discount;
 import model.Product;
 import model.Image;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,17 @@ public class ProductDAO {
         try{
         String sql = "select * from product where id=?";
         return template.queryForObject(sql, new Object[]{idPro}, new BeanPropertyRowMapper<Product>(Product.class));
+        } catch(EmptyResultDataAccessException e)
+        {
+            return null;
+        }
+        
+    }
+    
+    public Discount GetDiscount(int idPro) {
+        try{
+        String sql = "select * from discount where idProduct=?";
+        return template.queryForObject(sql, new Object[]{idPro}, new BeanPropertyRowMapper<Discount>(Discount.class));
         } catch(EmptyResultDataAccessException e)
         {
             return null;
@@ -69,5 +81,31 @@ public class ProductDAO {
                 return img;
             }
         });
+    }
+    
+    public int TinhTien(int idPro)
+    {
+        Product product = GetProduct(idPro);
+        Discount discount = GetDiscount(idPro);
+        long millis=System.currentTimeMillis();   
+        java.sql.Date dateNow =new java.sql.Date(millis);  //ngay hien tai
+        int _price = 1;
+        if(discount == null)
+        {
+            return product.getPrice();
+        }
+        else
+        {
+            // neu con han khuyen mai
+            if(discount.getDateBegin().compareTo(dateNow)<=0 && discount.getDateEnd().compareTo(dateNow)>=0)
+            {
+                _price = product.getPrice() - (product.getPrice()*discount.getDiscountValue()/100);
+            }
+            else
+            {
+                _price = product.getPrice();
+            }
+        }
+        return _price;
     }
 }

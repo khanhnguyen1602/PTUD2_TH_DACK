@@ -7,6 +7,8 @@ package model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -22,6 +24,24 @@ public class Product implements Serializable{
     private Timestamp dateAdd;
     private boolean deleted;
     private Image imgs = new Image();
+    private List<Product> listPro = new ArrayList<>();
+
+    public Discount getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Discount discount) {
+        this.discount = discount;
+    }
+    private Discount discount = new Discount();
+
+    public List<Product> getListPro() {
+        return listPro;
+    }
+
+    public void setListPro(List<Product> listPro) {
+        this.listPro = listPro;
+    }
 
     public Product() {
     }

@@ -7,6 +7,8 @@ package model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -18,6 +20,15 @@ public class Discount implements Serializable{
     private int discountValue;
     private Date dateBegin;
     private Date dateEnd;
+    private List<Discount> listDiscount = new ArrayList<>();
+
+    public List<Discount> getListDiscount() {
+        return listDiscount;
+    }
+
+    public void setListDiscount(List<Discount> listDiscount) {
+        this.listDiscount = listDiscount;
+    }
 
     public Discount() {
     }

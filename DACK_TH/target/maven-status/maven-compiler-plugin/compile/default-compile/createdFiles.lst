@@ -16,4 +16,5 @@ dao\UserDAO.class
 dao\SaleOrderDAO.class
 dao\ProductDAO.class
 model\User.class
+controller\CartController.class
 dao\ProductDAO$2.class
