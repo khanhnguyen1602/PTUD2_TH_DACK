@@ -51,6 +51,7 @@
         </div>
         <div class="row cart_items_row">
             <div class="col">
+                <c:set var="subtotal" value="0" />
                 <c:forEach var="cart" items="${listCart}">
                     <!-- Cart Item -->
                     <div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
@@ -81,6 +82,7 @@
                         </div>
                         <!-- Total -->
                         <c:set var="total" value="${cart.product.price * cart.quantity}" />
+                        <c:set var="subtotal" value="${subtotal + total}" />
                         <div class="cart_item_total">${total} đ</div>
                     </div>
                 </c:forEach>
@@ -91,9 +93,9 @@
         <div class="row row_cart_buttons">
             <div class="col">
                 <div class="cart_buttons d-flex flex-lg-row flex-column align-items-start justify-content-start">
-                    <div class="button continue_shopping_button"><a href="#">Continue shopping</a></div>
+                    <div class="button continue_shopping_button"><a href="/sampleapp/">Continue shopping</a></div>
                     <div class="cart_buttons_right ml-lg-auto">
-                        <div class="button clear_cart_button"><a href="#">Clear cart</a></div>
+                        <div class="button clear_cart_button"><a href="/sampleapp/cart/delete.html?idUser=${idUser}" onclick="return confirm('Bạn có chắc muốn xóa giỏ hàng?')">Clear cart</a></div>
                         <div class="button update_cart_button"><a href="#">Update cart</a></div>
                     </div>
                 </div>
@@ -110,12 +112,12 @@
                         <label class="delivery_option clearfix">Next day delivery
                             <input type="radio" name="radio">
                             <span class="checkmark"></span>
-                            <span class="delivery_price">$4.99</span>
+                            <span class="delivery_price">20000 đ</span>
                         </label>
                         <label class="delivery_option clearfix">Standard delivery
                             <input type="radio" name="radio">
                             <span class="checkmark"></span>
-                            <span class="delivery_price">$1.99</span>
+                            <span class="delivery_price">10000 đ</span>
                         </label>
                         <label class="delivery_option clearfix">Personal pickup
                             <input type="radio" checked="checked" name="radio">
@@ -146,7 +148,7 @@
                         <ul>
                             <li class="d-flex flex-row align-items-center justify-content-start">
                                 <div class="cart_total_title">Subtotal</div>
-                                <div class="cart_total_value ml-auto">$790.90</div>
+                                <div class="cart_total_value ml-auto">${subtotal} đ</div>
                             </li>
                             <li class="d-flex flex-row align-items-center justify-content-start">
                                 <div class="cart_total_title">Shipping</div>
@@ -154,11 +156,16 @@
                             </li>
                             <li class="d-flex flex-row align-items-center justify-content-start">
                                 <div class="cart_total_title">Total</div>
-                                <div class="cart_total_value ml-auto">$790.90</div>
+                                <div class="cart_total_value ml-auto">${subtotal} đ</div>
                             </li>
                         </ul>
                     </div>
-                    <div class="button checkout_button"><a href="#">Proceed to checkout</a></div>
+                    <c:if test="${subtotal > 0}">
+                        <div class="button checkout_button"><a href="/sampleapp/cart/showcheckout.html?idUser=${idUser}">Proceed to checkout</a></div>
+                    </c:if>
+                    <c:if test="${subtotal == 0}">
+                        <div class="button checkout_button"><a href="#">Proceed to checkout</a></div>
+                    </c:if>
                 </div>
             </div>
         </div>

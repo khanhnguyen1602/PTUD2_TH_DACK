@@ -1,4 +1,5 @@
 model\Cart.class
+dao\CartDAO$1.class
 controller\UserController.class
 dao\CartDAO.class
 controller\ProductController.class

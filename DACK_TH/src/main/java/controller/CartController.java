@@ -12,6 +12,9 @@ import model.Image;
 import model.Product;
 import model.Cart;
 import dao.CartDAO;
+import java.util.ArrayList;
+import model.SaleOrder;
+import model.SaleOrderDetail;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,21 +41,82 @@ public class CartController {
     @RequestMapping(value = "/cart", method = RequestMethod.GET)
     public String XemCart(ModelMap map, @RequestParam("idUser") int idUser){
         logger.info("Xem gio hang");
-        List<Cart> listCart = daoCart.LayDanhSachCartCuaUser(1);
+        List<Cart> listCart = daoCart.LayDanhSachCartCuaUser(idUser);
+        //tinh khuyen mai
         for(Cart c: listCart)
         {
             int tinhtien = daoPro.TinhTien(c.getIdProduct());
             c.getProduct().setPrice(tinhtien);
         }
         map.addAttribute("listCart", listCart);
+        map.addAttribute("idUser", idUser);
         return "cart";
         
     }
     
-//    @RequestMapping(value = "/cart")
-//    public String XemCart(ModelMap map){
-//        logger.info("Xem gio hang");
-//        return "cart";
-//        
-//    }
+    @RequestMapping(value = "/cart/delete", method = RequestMethod.GET)
+    public String DeleteCart(@RequestParam("idUser") int idUser){
+        logger.info("Xoa gio hang");
+        int deleted = daoCart.XoaCart(idUser);
+        return String.format("redirect:/cart.html?idUser=%d", idUser);
+        
+    }
+    
+    @RequestMapping(value = "/cart/showcheckout", method = RequestMethod.GET)
+    public String ShowCheckout(ModelMap map, @RequestParam("idUser") int idUser){
+        logger.info("Thanh toan");
+        List<Cart> listCart = daoCart.LayDanhSachCartCuaUser(idUser);
+        // tinh khuyen mai
+        for(Cart c: listCart)
+        {
+            int tinhtien = daoPro.TinhTien(c.getIdProduct());
+            c.getProduct().setPrice(tinhtien);
+        }
+        map.addAttribute("listCart", listCart);
+        return "checkout";
+    }
+    
+//    ====================== id User =================================
+    @RequestMapping(value = "/cart/checkout", method = RequestMethod.POST)
+    public String Checkout(ModelMap map, SaleOrder saleOrder){
+        logger.info("Thanh toan");
+        List<SaleOrderDetail> listDetails = new ArrayList<>();
+        List<Cart> listCart = daoCart.LayDanhSachCartCuaUser(2);
+        int tongtien = 0;
+        
+        //set idUser
+        saleOrder.setIdUser(2);
+        
+        // tinh khuyen mai
+        for(Cart c: listCart)
+        {
+            int tinhtien = daoPro.TinhTien(c.getIdProduct());
+            c.getProduct().setPrice(tinhtien);
+            
+            // tong tien
+            tongtien += c.getProduct().getPrice() * c.getQuantity();
+            // set total
+            saleOrder.setTotal(tongtien);
+            
+            // khoi tao saleorderdetail
+            SaleOrderDetail detail = new SaleOrderDetail();
+            detail.setIdProduct(c.getIdProduct());
+            detail.setPrice(c.getProduct().getPrice());
+            detail.setQuantity(c.getQuantity());
+            listDetails.add(detail);
+        }
+        
+        // luu vao table saleorder
+        SaleOrder insertSaleOrder = daoCart.AddSaleOrder(saleOrder);
+        
+        //luu vao table saleorderdetail
+        for(SaleOrderDetail dt: listDetails)
+        {
+            //cap nhat id order
+            dt.setIdOrder(insertSaleOrder.getId());
+            daoCart.AddSaleOrderdetail(dt);
+        }
+        map.addAttribute("msg", "Cảm ơn bạn đã lựa chọn sản phẩm của chúng tôi. Chúc bạn một ngày tốt lành !");
+        return "message";
+    }
 }
