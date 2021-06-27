@@ -116,6 +116,10 @@ public class CartController {
             dt.setIdOrder(insertSaleOrder.getId());
             daoCart.AddSaleOrderdetail(dt);
         }
+        
+        // xoa gio hang
+        daoCart.XoaCart(2);
+        
         map.addAttribute("msg", "Cảm ơn bạn đã lựa chọn sản phẩm của chúng tôi. Chúc bạn một ngày tốt lành !");
         return "message";
     }
