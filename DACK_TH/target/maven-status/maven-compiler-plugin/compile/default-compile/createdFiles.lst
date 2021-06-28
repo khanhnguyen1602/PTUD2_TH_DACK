@@ -16,6 +16,8 @@ dao\SaleOrderDetailDAO.class
 dao\UserDAO.class
 dao\SaleOrderDAO.class
 dao\ProductDAO.class
+.netbeans_automatic_build
 model\User.class
 controller\CartController.class
+dao\CartDAO$2.class
 dao\ProductDAO$2.class

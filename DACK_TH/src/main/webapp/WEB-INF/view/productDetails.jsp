@@ -17,7 +17,7 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/"/>styles/product.css">
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/"/>styles/product_responsive.css">
 
-
+<p>${sessionScope.userId}</p>
 <!-- Product Details -->
 
 <div class="product_details">

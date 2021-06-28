@@ -27,16 +27,24 @@
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="#">Trang chủ</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Cá nhân</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Liên hệ</a>
-                            </li>
+                            <c:if test="${sessionScope.userId > 0}">
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="#">Cá nhân</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="#">Liên hệ</a>
+                                </li>
+                            </c:if>
+                            
                         </ul>
                         <form class="d-flex">
-                            <a style="float: end" class="btn btn-outline-success" type="submit" href="/sampleapp/user/login.html">Login</a>
-                            <a style="float: end" class="btn btn-outline-success" type="submit" href="#">Logout</a>
+                            <c:if test="${sessionScope.userId > 0}">
+                                <a style="float: end" class="btn btn-outline-success" type="submit" href="/sampleapp/user/logout.html">Logout</a>
+                            </c:if>
+                            <c:if test="${sessionScope.userId == 0}">
+                                <a style="float: end" class="btn btn-outline-success" type="submit" href="/sampleapp/user/register.html">Register</a>
+                                <a style="float: end" class="btn btn-outline-success" type="submit" href="/sampleapp/user/login.html">Login</a>
+                            </c:if>
                         </form>
                         
                     </div>

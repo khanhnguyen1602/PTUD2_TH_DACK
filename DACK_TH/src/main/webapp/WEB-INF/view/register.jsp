@@ -17,15 +17,15 @@
  <div class="row">
         <div class="col-md-6">
             <div class="card">
-                <form onsubmit="event.preventDefault()" class="box">
+                <form  action="/sampleapp/user/register/xulyregister.html" method="POST" class="box">
                     <h1>Register</h1>
                     <p class="text-muted"> Please enter your infomation!</p> 
-                    <input type="text" name="username" placeholder="Username"> 
-                    <input type="password" name="password" placeholder="Password"> 
-                    <input type="email" name="email" placeholder="Email"> 
-                    <input type="text" name="phone" placeholder="Phone"> 
+                    <input required="required" type="text" name="username" placeholder="Username"> 
+                    <input required="required" type="password" name="password" placeholder="Password"> 
+                    <input required="required" type="email" name="email" placeholder="Email"> 
+                    <input required="required" type="text" name="phone" placeholder="Phone"> 
 <!--                    <a class="forgot text-muted" href="#">Forgot password?</a>-->
-                    <input type="submit" name="register" value="Register" href="/sampleapp/user/xulyregister.html">
+                    <input type="submit" name="register" value="Register">
                     <div class="col-md-12">
                         <ul class="social-network social-circle">
                             <li><a href="#" class="icoFacebook" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
