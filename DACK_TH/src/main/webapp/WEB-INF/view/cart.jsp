@@ -72,7 +72,7 @@
                             <div class="product_quantity_container">
                                 <div class="product_quantity clearfix">
                                     <span>Qty</span>
-                                    <input id="quantity_input" type="text" pattern="[0-9]*" value="${cart.quantity}">
+                                    <input id="quantity_input" name="quantity" type="text" pattern="[0-9]*" value="${cart.quantity}">
                                     <div class="quantity_buttons">
                                         <div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>
                                         <div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
@@ -95,7 +95,7 @@
                 <div class="cart_buttons d-flex flex-lg-row flex-column align-items-start justify-content-start">
                     <div class="button continue_shopping_button"><a href="/sampleapp/">Continue shopping</a></div>
                     <div class="cart_buttons_right ml-lg-auto">
-                        <div class="button clear_cart_button"><a href="/sampleapp/cart/delete.html?" onclick="return confirm('Bạn có chắc muốn xóa giỏ hàng?')">Clear cart</a></div>
+                        <div class="button clear_cart_button"><a href="/sampleapp/cart/delete.html" onclick="return confirm('Bạn có chắc muốn xóa giỏ hàng?')">Clear cart</a></div>
                         <div class="button update_cart_button"><a href="#">Update cart</a></div>
                     </div>
                 </div>

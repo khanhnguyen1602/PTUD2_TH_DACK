@@ -71,7 +71,36 @@ public class CartDAO {
         }
     }
     
-    public int XoaCart(int idUser)
+    public int AddCart(Cart c)
+    {
+        String sql = String.format("insert into cart (idUser, idProduct, quantity) values (%d,%d,%d)", c.getIdUser(), c.getIdProduct(), c.getQuantity());
+        return template.update(sql);
+    }
+    
+    public Cart FindCart(int idUser,int idPro) {
+        try{
+        String sql = "select * from cart where idUser=? and idProduct=?";
+        return template.queryForObject(sql, new Object[]{idUser,idPro}, new BeanPropertyRowMapper<Cart>(Cart.class));
+        } catch(EmptyResultDataAccessException e)
+        {
+            return null;
+        }
+        
+    }
+    
+    public int UpdateQuantity(int quantity, int idCart)
+    {
+        String sql = String.format("update cart set quantity=%d where id=%d", quantity, idCart);
+        return template.update(sql);
+    }
+    
+    public int XoaCart(int id)
+    {
+        String sql = String.format("delete from cart where id=%d", id);
+        return template.update(sql);
+    }
+    
+    public int XoaCartByIdUser(int idUser)
     {
         String sql = String.format("delete from cart where idUser=%d", idUser);
         return template.update(sql);

@@ -59,12 +59,44 @@ public class CartController {
         
     }
     
+    @RequestMapping(value = "/cart/addtocart", method = RequestMethod.POST)
+    public String AddtoCart(ModelMap map, HttpServletRequest request, Cart cart){
+        logger.info("Them vao gio hang");
+        System.out.println("id pro: " + cart.getProduct());
+        HttpSession session = request.getSession();
+        int idUser = Integer.parseInt(session.getAttribute("userId").toString());
+        cart.setIdUser(idUser);
+        // them vao gio hang
+        // kiem tra sp co trong gio hang chua, neu co --> neu sl > 0 thi update, sl =0 thi xoa sp khoi gio hang
+        //                                     neu chua co thi add
+        Cart c = daoCart.FindCart(idUser, cart.getIdProduct());
+        if(c != null) // tim thay
+        {
+            if(cart.getQuantity() > 0)
+            {
+                int updateQuantity = daoCart.UpdateQuantity(cart.getQuantity(), c.getId());
+            }
+            else
+            {
+                int deleteCart = daoCart.XoaCart(c.getId());
+            }
+        }
+        else
+        {
+            if(cart.getQuantity() > 0)
+            {
+                int insertCart = daoCart.AddCart(cart);
+            }
+        }
+        return "redirect:/product/list.html";
+    }
+    
     @RequestMapping(value = "/cart/delete")
     public String DeleteCart(HttpServletRequest request){
         HttpSession session = request.getSession();
         int idUser = Integer.parseInt(session.getAttribute("userId").toString());
         logger.info("Xoa gio hang");
-        int deleted = daoCart.XoaCart(idUser);
+        int deleted = daoCart.XoaCartByIdUser(idUser);
         return String.format("redirect:/cart.html", idUser);
         
     }
@@ -129,7 +161,7 @@ public class CartController {
         }
         
         // xoa gio hang
-        daoCart.XoaCart(idUser);
+        daoCart.XoaCartByIdUser(idUser);
         
         map.addAttribute("msg", "Cảm ơn bạn đã lựa chọn sản phẩm của chúng tôi. Chúc bạn một ngày tốt lành !");
         return "message";
