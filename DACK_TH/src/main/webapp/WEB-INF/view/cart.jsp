@@ -95,7 +95,7 @@
                 <div class="cart_buttons d-flex flex-lg-row flex-column align-items-start justify-content-start">
                     <div class="button continue_shopping_button"><a href="/sampleapp/">Continue shopping</a></div>
                     <div class="cart_buttons_right ml-lg-auto">
-                        <div class="button clear_cart_button"><a href="/sampleapp/cart/delete.html?idUser=${idUser}" onclick="return confirm('Bạn có chắc muốn xóa giỏ hàng?')">Clear cart</a></div>
+                        <div class="button clear_cart_button"><a href="/sampleapp/cart/delete.html?" onclick="return confirm('Bạn có chắc muốn xóa giỏ hàng?')">Clear cart</a></div>
                         <div class="button update_cart_button"><a href="#">Update cart</a></div>
                     </div>
                 </div>
@@ -161,7 +161,7 @@
                         </ul>
                     </div>
                     <c:if test="${subtotal > 0}">
-                        <div class="button checkout_button"><a href="/sampleapp/cart/showcheckout.html?idUser=${idUser}">Proceed to checkout</a></div>
+                        <div class="button checkout_button"><a href="/sampleapp/cart/showcheckout.html">Proceed to checkout</a></div>
                     </c:if>
                     <c:if test="${subtotal == 0}">
                         <div class="button checkout_button"><a href="#">Proceed to checkout</a></div>

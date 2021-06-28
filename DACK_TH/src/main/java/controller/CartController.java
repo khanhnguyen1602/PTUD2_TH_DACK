@@ -13,11 +13,14 @@ import model.Product;
 import model.Cart;
 import dao.CartDAO;
 import java.util.ArrayList;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import model.SaleOrder;
 import model.SaleOrderDetail;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,8 +41,10 @@ public class CartController {
     @Autowired
     CartDAO daoCart;
     
-    @RequestMapping(value = "/cart", method = RequestMethod.GET)
-    public String XemCart(ModelMap map, @RequestParam("idUser") int idUser){
+    @RequestMapping(value = "/cart")
+    public String XemCart(ModelMap map, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        int idUser = Integer.parseInt(session.getAttribute("userId").toString());
         logger.info("Xem gio hang");
         List<Cart> listCart = daoCart.LayDanhSachCartCuaUser(idUser);
         //tinh khuyen mai
@@ -54,17 +59,21 @@ public class CartController {
         
     }
     
-    @RequestMapping(value = "/cart/delete", method = RequestMethod.GET)
-    public String DeleteCart(@RequestParam("idUser") int idUser){
+    @RequestMapping(value = "/cart/delete")
+    public String DeleteCart(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        int idUser = Integer.parseInt(session.getAttribute("userId").toString());
         logger.info("Xoa gio hang");
         int deleted = daoCart.XoaCart(idUser);
-        return String.format("redirect:/cart.html?idUser=%d", idUser);
+        return String.format("redirect:/cart.html", idUser);
         
     }
     
     @RequestMapping(value = "/cart/showcheckout", method = RequestMethod.GET)
-    public String ShowCheckout(ModelMap map, @RequestParam("idUser") int idUser){
+    public String ShowCheckout(ModelMap map, HttpServletRequest request){
         logger.info("Thanh toan");
+        HttpSession session = request.getSession();
+        int idUser = Integer.parseInt(session.getAttribute("userId").toString());
         List<Cart> listCart = daoCart.LayDanhSachCartCuaUser(idUser);
         // tinh khuyen mai
         for(Cart c: listCart)
@@ -76,16 +85,18 @@ public class CartController {
         return "checkout";
     }
     
-//    ====================== id User =================================
+
     @RequestMapping(value = "/cart/checkout", method = RequestMethod.POST)
-    public String Checkout(ModelMap map, SaleOrder saleOrder){
+    public String Checkout(ModelMap map, SaleOrder saleOrder, HttpServletRequest request){
         logger.info("Thanh toan");
+        HttpSession session = request.getSession();
+        int idUser = Integer.parseInt(session.getAttribute("userId").toString());
         List<SaleOrderDetail> listDetails = new ArrayList<>();
-        List<Cart> listCart = daoCart.LayDanhSachCartCuaUser(2);
+        List<Cart> listCart = daoCart.LayDanhSachCartCuaUser(idUser);
         int tongtien = 0;
         
         //set idUser
-        saleOrder.setIdUser(2);
+        saleOrder.setIdUser(idUser);
         
         // tinh khuyen mai
         for(Cart c: listCart)
@@ -118,7 +129,7 @@ public class CartController {
         }
         
         // xoa gio hang
-        daoCart.XoaCart(2);
+        daoCart.XoaCart(idUser);
         
         map.addAttribute("msg", "Cảm ơn bạn đã lựa chọn sản phẩm của chúng tôi. Chúc bạn một ngày tốt lành !");
         return "message";
