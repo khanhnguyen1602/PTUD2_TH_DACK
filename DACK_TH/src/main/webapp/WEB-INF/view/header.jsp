@@ -35,6 +35,7 @@
                             </li>
                         </ul>
                         <form class="d-flex">
+                            <a style="float: end" class="btn btn-outline-success" type="submit" href="/sampleapp/user/login.html">Login</a>
                             <a style="float: end" class="btn btn-outline-success" type="submit" href="#">Logout</a>
                         </form>
                         

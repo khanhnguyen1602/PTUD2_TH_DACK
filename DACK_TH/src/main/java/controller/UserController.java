@@ -9,6 +9,7 @@ import dao.UserDAO;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.ui.ModelMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,4 +26,16 @@ public class UserController {
     
     @Autowired
     UserDAO daoUser;
+    
+    @RequestMapping(value = "/user/register")
+    public String Register(ModelMap map){
+        logger.info("Register");
+        return "register";
+    }
+    
+    @RequestMapping(value = "/user/login")
+    public String Login(ModelMap map){
+        logger.info("Login");
+        return "login";
+    }
 }
