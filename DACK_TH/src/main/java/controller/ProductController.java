@@ -7,6 +7,7 @@ package controller;
 
 import dao.ProductDAO;
 import dao.UserDAO;
+import java.util.ArrayList;
 import java.util.List;
 import model.Image;
 import model.Product;
@@ -55,6 +56,7 @@ public class ProductController {
         p.getImgs().setListImg(listImg);
         int countImage = listImg.size();
         map.addAttribute("p", p);
+        map.addAttribute("daoPro", daoPro);
         map.addAttribute("countImg", countImage);
         return "productDetails";
         

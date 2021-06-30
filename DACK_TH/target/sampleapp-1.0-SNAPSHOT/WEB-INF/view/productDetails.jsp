@@ -8,7 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page='header.jsp'></jsp:include>
 
-
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/"/>styles/css/productDetail.css">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/"/>styles/bootstrap4/bootstrap.min.css">
 <link href="<c:url value="/resources/"/>plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/"/>plugins/OwlCarousel2-2.2.1/owl.carousel.css">
@@ -47,7 +47,10 @@
             <!-- Product Image -->
             <div class="col-lg-6">
                 <div class="details_image">
-                    <div class="details_image_large"><img style="max-width: 400px;width: 100%; max-height: 500px; height: auto" src="<c:url value="/resources/Images/"/>${p.imgs.listImg[0].link}" alt="img"></div>
+                    <div class="details_image_large">
+                        
+                        <img class="image-large" src="<c:url value="/resources/Images/"/>${p.imgs.listImg[0].link}" alt="img">
+                    </div>
                     <div class="details_image_thumbnails d-flex flex-row align-items-start justify-content-between">
                         <div class="details_image_thumbnail active" data-image="<c:url value="/resources/Images/"/>${p.imgs.listImg[0].link}"><img src="<c:url value="/resources/Images/"/>${p.imgs.listImg[0].link}" alt="img"></div>
                             <c:set var="index" value="0" />
@@ -70,8 +73,17 @@
             <div class="col-lg-6">
                 <div class="details_content">
                     <div class="details_name">${p.productName}</div>
-                    <div class="details_discount">${p.price} đ</div>
-                    <div class="details_price">${p.price} đ</div>
+                    <c:set var="pricediscount" value="${daoPro.TinhTien(p.id)}" />
+                    <c:if test="${pricediscount < p.price}">
+                        <div class="details_discount">${p.price} đ</div>
+                        <div class="details_price">${pricediscount} đ</div>
+                    </c:if>
+                     <c:if test="${pricediscount == p.price}">
+                        <!--<div class="details_discount">${p.price} đ</div>-->
+                        <div class="details_price">${p.price} đ</div>
+                    </c:if>
+<!--                    <div class="details_discount">${p.price} đ</div>
+                        <div class="details_price">${p.price} đ</div>-->
 
                     <!-- In Stock -->
                     <div class="in_stock_container">
