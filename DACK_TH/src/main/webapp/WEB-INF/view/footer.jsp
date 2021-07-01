@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<br><br><br><br>
+<br><br>
  </div>
     </body>
 </html>

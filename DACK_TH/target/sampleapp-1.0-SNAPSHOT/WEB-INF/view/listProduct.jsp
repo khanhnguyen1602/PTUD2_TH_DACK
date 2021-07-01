@@ -4,7 +4,6 @@
     Author     : phuongkhanh
 --%>
 
-<%@page import="javax.servlet.http.HttpSession"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page='header.jsp'></jsp:include>
@@ -28,8 +27,7 @@
             overflow:scroll;
         }
     </style>
-    <!--<img src="<c:url value="/resources/Images/VH1.jpg"/>">-->
-    <p>${sessionScope.userId}</p>
+    <%-- <img src="<c:url value="/resources/Images/VH1.jpg"/>--%>
     <h1>Danh sách sản phẩm</h1>
     <div class="scroll">
         <table class="table">

@@ -18,5 +18,4 @@ dao\SaleOrderDAO.class
 dao\ProductDAO.class
 model\User.class
 controller\CartController.class
-dao\CartDAO$2.class
 dao\ProductDAO$2.class

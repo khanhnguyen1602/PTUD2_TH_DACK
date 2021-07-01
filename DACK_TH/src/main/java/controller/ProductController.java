@@ -7,7 +7,6 @@ package controller;
 
 import dao.ProductDAO;
 import dao.UserDAO;
-import java.util.ArrayList;
 import java.util.List;
 import model.Image;
 import model.Product;
@@ -50,15 +49,32 @@ public class ProductController {
     }
     
     @RequestMapping(value = "/product/details", method = RequestMethod.GET)
-    public String ProductDetails(ModelMap map, @RequestParam("idPro") int idPro){
+    public String ProductDetails(ModelMap map, @RequestParam(value = "idPro") int idPro){
         Product p = daoPro.GetProduct(idPro);
         List<Image> listImg = daoPro.LayImage(idPro);
         p.getImgs().setListImg(listImg);
         int countImage = listImg.size();
         map.addAttribute("p", p);
-        map.addAttribute("daoPro", daoPro);
         map.addAttribute("countImg", countImage);
         return "productDetails";
+        
+    }
+    
+    @RequestMapping(value = "/home")
+    public String Home(ModelMap map){
+        logger.info("Lay ds product");
+        List<Product> lstPro = daoPro.LayDanhSachProducts();
+        map.addAttribute("listPro", lstPro);
+        map.addAttribute("daoKH", daoPro);
+        for(Product p: lstPro)
+        {
+            System.out.println("Name: " + p.getProductName());
+            for(Image img: p.getImgs().getListImg())
+            {
+                System.out.println("Link: " + img.getLink());
+            }
+        }
+        return "home";
         
     }
 }

@@ -65,7 +65,6 @@ public class ProductDAO {
                 // lấy images 
                 List<Image> listImg = LayImage(rs.getInt(1));
                 pro.getImgs().setListImg(listImg);
-                
                 return pro;
             }
         });
@@ -108,4 +107,6 @@ public class ProductDAO {
         }
         return _price;
     }
+    
+    
 }
