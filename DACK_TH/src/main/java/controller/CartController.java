@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import javax.servlet.http.HttpSession;
+
 /**
  *
  * @author phuongkhanh
@@ -36,7 +38,7 @@ public class CartController {
     CartDAO daoCart;
     
     @RequestMapping(value = "/cart", method = RequestMethod.GET)
-    public String XemCart(ModelMap map, @RequestParam("idUser") int idUser){
+    public String XemCart(ModelMap map, HttpSession session, @RequestParam("idUser") int idUser){
         logger.info("Xem gio hang");
         List<Cart> listCart = daoCart.LayDanhSachCartCuaUser(1);
         for(Cart c: listCart)
@@ -45,6 +47,7 @@ public class CartController {
             c.getProduct().setPrice(tinhtien);
         }
         map.addAttribute("listCart", listCart);
+        session.setAttribute("cartNum", listCart.size());
         return "cart";
         
     }

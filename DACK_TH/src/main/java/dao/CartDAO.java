@@ -40,7 +40,7 @@ public class CartDAO {
                c.setId(rs.getInt(1));
                c.setIdUser(rs.getInt(2));
                c.setIdProduct(rs.getInt(3));
-               c.setQuantity(rs.getInt(4));
+               c.setQuantity(c.getQuantity() + 1);
                
                // ket voi bang product
                Product pro = daoPro.GetProduct(rs.getInt(3));

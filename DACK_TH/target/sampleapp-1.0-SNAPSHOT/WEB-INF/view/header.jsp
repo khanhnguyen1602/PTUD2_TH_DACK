@@ -6,13 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8" import="model.Product"%>
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.sql.*"%>
-<%@ page import="javax.sql.*"%>
-<%@page import="java.util.ArrayList"%>
-<%ArrayList<Product> listPro = new ArrayList<Product>();
-    int i = 0; for(Product p: listPro){
-        i = i + p.getId();
-    }%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -46,8 +40,7 @@
                             <a class="btn btn-outline-success" type="submit" href="#">Logout</a>
                             <a class="btn btn-success btn-sm ml-3" href="show">
                                 <i class="fa fa-shopping-cart"></i> Cart
-                                <span class="badge badge-light"><%= i%>
-                                    </span>
+                                <span class="badge badge-light"><c:out value="${sessionScope.cartNum}"/></span>
                             </a>
                         </form>
                         
