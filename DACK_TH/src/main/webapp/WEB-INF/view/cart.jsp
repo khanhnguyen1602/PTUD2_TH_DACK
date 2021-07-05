@@ -58,7 +58,7 @@
                         <!-- Name -->
                         <div class="cart_item_product d-flex flex-row align-items-center justify-content-start">
                             <div class="cart_item_image">
-                                <div><img src="<c:url value="/resources/Images/"/>${cart.product.imgs.listImg[0].link}" alt="product img"></div>
+                                <img style="max-height: 130px; height: auto" src="<c:url value="/resources/Images/"/>${cart.product.imgs.listImg[0].link}" alt="product img">
                             </div>
                             <div class="cart_item_name_container">
                                 <div class="cart_item_name"><a href="#">${cart.product.productName}</a></div>
