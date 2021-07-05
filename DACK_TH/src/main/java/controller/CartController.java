@@ -55,6 +55,7 @@ public class CartController {
         }
         map.addAttribute("listCart", listCart);
         map.addAttribute("idUser", idUser);
+//        session.setAttribute("cartNum", listCart.size());
         return "cart";
         
     }

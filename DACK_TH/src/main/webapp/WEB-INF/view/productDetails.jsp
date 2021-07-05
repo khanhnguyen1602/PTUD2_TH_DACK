@@ -37,7 +37,7 @@
     }
 </style>
 
-<p>${sessionScope.userId}</p>
+<!--<p>${sessionScope.userId}</p>-->
 <!-- Product Details -->
 
 <div class="product_details">

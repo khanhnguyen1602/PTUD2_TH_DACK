@@ -9,6 +9,8 @@ import dao.ProductDAO;
 import dao.UserDAO;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import model.Image;
 import model.Product;
 
@@ -59,6 +61,25 @@ public class ProductController {
         map.addAttribute("daoPro", daoPro);
         map.addAttribute("countImg", countImage);
         return "productDetails";
+        
+    }
+    
+    @RequestMapping(value = "/index")
+    public String Home(ModelMap map, HttpServletRequest request){
+        logger.info("Lay ds product");
+        List<Product> lstPro = daoPro.LayDanhSachProducts();
+        map.addAttribute("listPro", lstPro);
+        map.addAttribute("daoKH", daoPro);
+        for(Product p: lstPro)
+        {
+            System.out.println("Name: " + p.getProductName());
+            for(Image img: p.getImgs().getListImg())
+            {
+                System.out.println("Link: " + img.getLink());
+            }
+        }
+        HttpSession session = request.getSession();
+        return "home";
         
     }
 }

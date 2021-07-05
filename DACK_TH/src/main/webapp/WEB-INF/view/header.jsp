@@ -25,7 +25,7 @@
                     <div class="collapse navbar-collapse" id="navbarScroll">
                         <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Trang chủ</a>
+                                <a class="nav-link active" aria-current="page" href="/sampleapp/index.html">Trang chủ</a>
                             </li>
                             <c:if test="${sessionScope.userId > 0}">
                                 <li class="nav-item">
@@ -40,10 +40,14 @@
                         <form class="d-flex">
                             <c:if test="${sessionScope.userId > 0}">
                                 <a style="float: end" class="btn btn-outline-success" type="submit" href="/sampleapp/user/logout.html">Logout</a>
+                                <a class="btn btn-success btn-sm ml-3" href="/sampleapp/cart.html">
+                                    <i class="fa fa-shopping-cart"></i> Cart
+                                    <span class="badge badge-light"><c:out value="${sessionScope.cartNum}"/></span>
+                                </a>
                             </c:if>
-                            <c:if test="${sessionScope.userId == 0}">
-                                <a style="float: end" class="btn btn-outline-success" type="submit" href="/sampleapp/user/register.html">Register</a>
-                                <a style="float: end" class="btn btn-outline-success" type="submit" href="/sampleapp/user/login.html">Login</a>
+                            <c:if test="${sessionScope.userId == 0 || sessionScope.userId == null}">
+                                <a style="float: end;" class="btn btn-outline-success" type="submit" href="/sampleapp/user/register.html">Register</a>
+                                <a style="float: end; margin-left: 5px" class="btn btn-outline-success" type="submit" href="/sampleapp/user/login.html">Login</a>
                             </c:if>
                         </form>
                         

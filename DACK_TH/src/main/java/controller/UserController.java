@@ -81,7 +81,7 @@ public class UserController {
             {
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", findUser.getId());
-                str = "redirect:/product/list.html";
+                str = "redirect:/index.html";
             }
             else
             {
@@ -103,6 +103,6 @@ public class UserController {
         logger.info("Logout");
         HttpSession session = request.getSession();
         session.setAttribute("userId", 0);
-        return "redirect:/product/list.html";
+        return "redirect:/index.html";
     }
 }
