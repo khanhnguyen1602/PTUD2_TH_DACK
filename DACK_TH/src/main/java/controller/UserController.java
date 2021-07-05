@@ -5,10 +5,12 @@
  */
 package controller;
 
+import dao.CartDAO;
 import dao.UserDAO;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import model.Cart;
 import model.User;
 
 import org.apache.commons.codec.binary.Base64;
@@ -30,6 +32,9 @@ public class UserController {
     
     @Autowired
     UserDAO daoUser;
+    
+    @Autowired
+    CartDAO daoCart;
     
     @RequestMapping(value = "/user/register")
     public String Register(ModelMap map){
@@ -82,6 +87,7 @@ public class UserController {
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", findUser.getId());
                 str = "redirect:/index.html";
+                
             }
             else
             {

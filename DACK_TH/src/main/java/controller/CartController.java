@@ -87,6 +87,9 @@ public class CartController {
             if(cart.getQuantity() > 0)
             {
                 int insertCart = daoCart.AddCart(cart);
+                // update lai icon sl sp trong gio hang
+//                List<Cart> listCart = daoCart.LayDanhSachCartCuaUser(idUser);
+//                session.setAttribute("cartNum", listCart.size());
             }
         }
         return "redirect:/index.html";
@@ -98,7 +101,8 @@ public class CartController {
         int idUser = Integer.parseInt(session.getAttribute("userId").toString());
         logger.info("Xoa gio hang");
         int deleted = daoCart.XoaCartByIdUser(idUser);
-        return String.format("redirect:/cart.html", idUser);
+//        session.setAttribute("cartNum", 0);
+        return String.format("redirect:/cart.html");
         
     }
     
