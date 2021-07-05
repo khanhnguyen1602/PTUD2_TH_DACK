@@ -8,7 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page='header.jsp'></jsp:include>
 
-
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/"/>styles/css/productDetail.css">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/"/>styles/bootstrap4/bootstrap.min.css">
 <link href="<c:url value="/resources/"/>plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/"/>plugins/OwlCarousel2-2.2.1/owl.carousel.css">
@@ -17,7 +17,27 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/"/>styles/product.css">
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/"/>styles/product_responsive.css">
 
+<style>
+    .btnAddtoCart{
+        width: 178px;
+        height: 61px;
+        background: none;
+        text-align: center;
+        border: solid 2px #1b1b1b;
+        overflow: hidden;
+        cursor: pointer;
+        margin-left: 13px;
+        font-size: 17px;
+        font-weight: 500;
+    }
+    .btnAddtoCart:hover{
+        color: white;
+        background: black;
+        border: double;
+    }
+</style>
 
+<!--<p>${sessionScope.userId}</p>-->
 <!-- Product Details -->
 
 <div class="product_details">
@@ -27,7 +47,10 @@
             <!-- Product Image -->
             <div class="col-lg-6">
                 <div class="details_image">
-                    <div class="details_image_large"><img style="max-width: 400px;width: 100%; max-height: 500px; height: auto" src="<c:url value="/resources/Images/"/>${p.imgs.listImg[0].link}" alt="img"></div>
+                    <div class="details_image_large">
+                        
+                        <img class="image-large" src="<c:url value="/resources/Images/"/>${p.imgs.listImg[0].link}" alt="img">
+                    </div>
                     <div class="details_image_thumbnails d-flex flex-row align-items-start justify-content-between">
                         <div class="details_image_thumbnail active" data-image="<c:url value="/resources/Images/"/>${p.imgs.listImg[0].link}"><img src="<c:url value="/resources/Images/"/>${p.imgs.listImg[0].link}" alt="img"></div>
                             <c:set var="index" value="0" />
@@ -50,8 +73,17 @@
             <div class="col-lg-6">
                 <div class="details_content">
                     <div class="details_name">${p.productName}</div>
-                    <div class="details_discount">${p.price} đ</div>
-                    <div class="details_price">${p.price} đ</div>
+                    <c:set var="pricediscount" value="${daoPro.TinhTien(p.id)}" />
+                    <c:if test="${pricediscount < p.price}">
+                        <div class="details_discount">${p.price} đ</div>
+                        <div class="details_price">${pricediscount} đ</div>
+                    </c:if>
+                     <c:if test="${pricediscount == p.price}">
+                        <!--<div class="details_discount">${p.price} đ</div>-->
+                        <div class="details_price">${p.price} đ</div>
+                    </c:if>
+<!--                    <div class="details_discount">${p.price} đ</div>
+                        <div class="details_price">${p.price} đ</div>-->
 
                     <!-- In Stock -->
                     <div class="in_stock_container">
@@ -62,18 +94,22 @@
                         <p>${p.description}</p>
                     </div>
 
-                    <!-- Product Quantity -->
-                    <div class="product_quantity_container">
-                        <div class="product_quantity clearfix">
-                            <span>Qty</span>
-                            <input id="quantity" name="quantity" type="text" pattern="[0-9]*" value="1">
-                            <div class="quantity_buttons">
-                                <div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>
-                                <div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
+                    <form action="/sampleapp/cart/addtocart.html" method="POST">
+                        <!-- Product Quantity -->
+                        <div class="product_quantity_container">
+                            <div class="product_quantity clearfix">
+                                <span>Qty</span>
+                                <input id="quantity_input" name="quantity" type="text" pattern="[0-9]*" value="1">
+                                <div class="quantity_buttons">
+                                    <div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>
+                                    <div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
+                                </div>
                             </div>
+
+                            <input type="number" name="idProduct" value="${p.id}" hidden="hidden">
+                            <button class="btnAddtoCart" type="submit" >Thêm vào giỏ hàng</button>
                         </div>
-                        <div class="button cart_button"><a href="#">Add to cart</a></div>
-                    </div>
+                    </form>
 
                     <!-- Share -->
                     <div class="details_share">

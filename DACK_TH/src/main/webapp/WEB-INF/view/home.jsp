@@ -39,12 +39,12 @@
                     <div class="col-sm-9">
                         <div class="row">
                             <c:forEach items="${listPro}" var="o">
-                                <c:url value="/resources/Images/${p.imgs.listImg}" var="i"></c:url>
+                                <%--<c:url value="/resources/Images/${o.imgs.listImg[0].link}" var="i"></c:url>--%>
                                 <div class="col-12 col-md-6 col-lg-4">
                                     <div class="card">
-                                        <img class="card-img-top" src="i" alt="Card image cap">
+                                        <img class="card-img-top" src="<c:url value="/resources/Images/${o.imgs.listImg[0].link}"/>" alt="Card image cap">
                                         <div class="card-body">
-                                            <h4 class="card-title show_txt"><a href="#" title="View Product">${o.productName}</a></h4>
+                                            <h4 class="card-title show_txt"><a href="/sampleapp/product/details.html?idPro=${o.id}" title="View Product">${o.productName}</a></h4>
                                             <div class="row">
                                                 <div class="col">
                                                     <p class="btn btn-danger btn-block">${o.price} $</p>
@@ -66,10 +66,10 @@
                     <div class="col-sm-9">
                         <div class="row">
                             <c:forEach items="${listPro}" var="o">
-                                <c:url value="/resources/Images/${p.imgs.listImg}" var="i"></c:url>
+                                <%--<c:url value="/resources/Images/${p.imgs.listImg}" var="i"></c:url>--%>
                                 <div class="col-12 col-md-6 col-lg-4">
                                     <div class="card">
-                                        <img class="card-img-top" src="i" alt="Card image cap">
+                                        <img class="card-img-top" src="<c:url value="/resources/Images/${o.imgs.listImg[0].link}"/>" alt="Card image cap">
                                         <div class="card-body">
                                             <h4 class="card-title show_txt"><a href="#" title="View Product">${o.productName}</a></h4>
                                             <div class="row">
