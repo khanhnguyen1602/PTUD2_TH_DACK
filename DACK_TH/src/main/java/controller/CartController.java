@@ -89,7 +89,7 @@ public class CartController {
                 int insertCart = daoCart.AddCart(cart);
             }
         }
-        return "redirect:/product/list.html";
+        return "redirect:/index.html";
     }
     
     @RequestMapping(value = "/cart/delete")

@@ -50,7 +50,12 @@
                                                     <p class="btn btn-danger btn-block">${o.price} $</p>
                                                 </div>
                                                 <div class="col">
-                                                    <a href="#" class="btn btn-success btn-block">Add to cart</a>
+                                                    <form action="/sampleapp/cart/addtocart.html" method="POST">
+                                                        <input type="number" name="idProduct" value="${o.id}" hidden="hidden">
+                                                        <input type="number" name="quantity" value="1" hidden="hidden">
+                                                         <button class="btn btn-success btn-block">Add to cart</button>
+                                                    </form>
+                                                   
                                                 </div>
                                             </div>
                                         </div>
