@@ -27,6 +27,12 @@ public class ProductDAO {
         this.template = template;
     }
     
+    public int UpdateTotalSold(int idPro, int quantity)
+    {
+        String sql = String.format("update product set totalSold=totalSold+%d where id=%d", quantity, idPro);
+        return template.update(sql);
+    }
+    
     public Product GetProduct(int idPro) {
         try{
         String sql = "select * from product where id=?";

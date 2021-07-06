@@ -21,6 +21,7 @@
     </head>
     <body>
     <br>
+    <c:set var="userId" value="${sessionScope.userId}" />
         <div class="container">
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
@@ -50,11 +51,16 @@
                                                     <p class="btn btn-danger btn-block">${o.price} $</p>
                                                 </div>
                                                 <div class="col">
-                                                    <form action="/sampleapp/cart/addtocart.html" method="POST">
-                                                        <input type="number" name="idProduct" value="${o.id}" hidden="hidden">
-                                                        <input type="number" name="quantity" value="1" hidden="hidden">
-                                                         <button class="btn btn-success btn-block">Add to cart</button>
-                                                    </form>
+                                                    <c:if test="${userId > 0}">
+                                                        <form action="/sampleapp/cart/addtocart.html" method="POST">
+                                                            <input type="number" name="idProduct" value="${o.id}" hidden="hidden">
+                                                            <input type="number" name="quantity" value="1" hidden="hidden">
+                                                             <button class="btn btn-success btn-block">Add to cart</button>
+                                                        </form>
+                                                    </c:if>
+                                                    <c:if test="${userId == 0 || userId == null}">
+                                                        <a href="/sampleapp/user/login.html" class="btn btn-success btn-block">Add to cart</a>
+                                                    </c:if>
                                                    
                                                 </div>
                                             </div>

@@ -165,6 +165,12 @@ public class CartController {
             daoCart.AddSaleOrderdetail(dt);
         }
         
+        // update totalSold
+        for(Cart c: listCart)
+        {
+            int update = daoPro.UpdateTotalSold(c.getIdProduct(), c.getQuantity());
+        }
+        
         // xoa gio hang
         daoCart.XoaCartByIdUser(idUser);
         

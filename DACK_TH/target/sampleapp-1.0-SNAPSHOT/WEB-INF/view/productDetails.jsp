@@ -39,7 +39,7 @@
 
 <!--<p>${sessionScope.userId}</p>-->
 <!-- Product Details -->
-
+<c:set var="userId" value="${sessionScope.userId}" />
 <div class="product_details">
     <div class="container">
         <div class="row details_row">
@@ -93,24 +93,47 @@
                     <div class="details_text">
                         <p>${p.description}</p>
                     </div>
-
-                    <form action="/sampleapp/cart/addtocart.html" method="POST">
-                        <!-- Product Quantity -->
-                        <div class="product_quantity_container">
-                            <div class="product_quantity clearfix">
-                                <span>Qty</span>
-                                <input id="quantity_input" name="quantity" type="text" pattern="[0-9]*" value="1">
-                                <div class="quantity_buttons">
-                                    <div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>
-                                    <div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
+                    <c:if test="${userId > 0}">
+                        <form action="/sampleapp/cart/addtocart.html" method="POST">
+                            <!-- Product Quantity -->
+                            <div class="product_quantity_container">
+                                <div class="product_quantity clearfix">
+                                    <span>Qty</span>
+                                    <input id="quantity_input" name="quantity" type="text" pattern="[0-9]*" value="1">
+                                    <div class="quantity_buttons">
+                                        <div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>
+                                        <div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
+                                    </div>
                                 </div>
+
+                                <input type="number" name="idProduct" value="${p.id}" hidden="hidden">
+
+                                <button class="btnAddtoCart" type="submit" >Thêm vào giỏ hàng</button>
+
                             </div>
+                        </form>
+                    </c:if>
+                    <c:if test="${userId == 0 || userId == null}">
+                        <form action="/sampleapp/user/login.html">
+                            <!-- Product Quantity -->
+                            <div class="product_quantity_container">
+                                <div class="product_quantity clearfix">
+                                    <span>Qty</span>
+                                    <input id="quantity_input" name="quantity" type="text" pattern="[0-9]*" value="1">
+                                    <div class="quantity_buttons">
+                                        <div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>
+                                        <div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
+                                    </div>
+                                </div>
 
-                            <input type="number" name="idProduct" value="${p.id}" hidden="hidden">
-                            <button class="btnAddtoCart" type="submit" >Thêm vào giỏ hàng</button>
-                        </div>
-                    </form>
+                                <input type="number" name="idProduct" value="${p.id}" hidden="hidden">
 
+                                <button class="btnAddtoCart" type="submit" >Thêm vào giỏ hàng</button>
+
+                            </div>
+                        </form>
+                    </c:if>
+                    
                     <!-- Share -->
                     <div class="details_share">
                         <span>Share:</span>
