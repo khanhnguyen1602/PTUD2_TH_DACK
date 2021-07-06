@@ -67,10 +67,13 @@ public class ProductController {
     @RequestMapping(value = "/index")
     public String Home(ModelMap map, HttpServletRequest request){
         logger.info("Lay ds product");
-        List<Product> lstPro = daoPro.LayDanhSachProducts();
-        map.addAttribute("listPro", lstPro);
+        List<Product> lstTopSeller = daoPro.LayDanhSachProductsBanChayNhat();
+        List<Product> lstNews = daoPro.LayDanhSachProductsMoiNhat();
+        
+        map.addAttribute("listTopSeller", lstTopSeller);
+        map.addAttribute("listNews", lstNews);
         map.addAttribute("daoKH", daoPro);
-        for(Product p: lstPro)
+        for(Product p: lstTopSeller)
         {
             System.out.println("Name: " + p.getProductName());
             for(Image img: p.getImgs().getListImg())

@@ -39,7 +39,7 @@
                 <div class="row">
                     <div class="col-sm-9">
                         <div class="row">
-                            <c:forEach items="${listPro}" var="o">
+                            <c:forEach items="${listTopSeller}" var="o">
                                 <%--<c:url value="/resources/Images/${o.imgs.listImg[0].link}" var="i"></c:url>--%>
                                 <div class="col-12 col-md-6 col-lg-4">
                                     <div class="card">
@@ -76,7 +76,7 @@
               <div class="row">
                     <div class="col-sm-9">
                         <div class="row">
-                            <c:forEach items="${listPro}" var="o">
+                            <c:forEach items="${listNews}" var="o">
                                 <%--<c:url value="/resources/Images/${p.imgs.listImg}" var="i"></c:url>--%>
                                 <div class="col-12 col-md-6 col-lg-4">
                                     <div class="card">

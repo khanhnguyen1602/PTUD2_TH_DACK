@@ -55,6 +55,50 @@ public class ProductDAO {
         
     }
     
+    public List<Product> LayDanhSachProductsMoiNhat() {
+        return template.query("select * from Product where deleted=0 order by id desc limit 15", new RowMapper<Product>() {
+            public Product mapRow(ResultSet rs, int row) throws SQLException {
+                Product pro = new Product();
+                pro.setId(rs.getInt(1));
+                pro.setIdCategory(rs.getInt(2));
+                pro.setProductName(rs.getNString(3));
+                pro.setPrice(rs.getInt(4));
+                pro.setDescription(rs.getNString(5));
+                pro.setTotalSold(rs.getInt(6));
+                pro.setDateAdd(rs.getTimestamp(7));
+                pro.setDeleted(rs.getBoolean(8));
+                
+                // lấy images 
+                List<Image> listImg = LayImage(rs.getInt(1));
+                pro.getImgs().setListImg(listImg);
+                
+                return pro;
+            }
+        });
+    }
+    
+    public List<Product> LayDanhSachProductsBanChayNhat() {
+        return template.query("select * from Product where deleted=0 order by totalSold desc limit 15", new RowMapper<Product>() {
+            public Product mapRow(ResultSet rs, int row) throws SQLException {
+                Product pro = new Product();
+                pro.setId(rs.getInt(1));
+                pro.setIdCategory(rs.getInt(2));
+                pro.setProductName(rs.getNString(3));
+                pro.setPrice(rs.getInt(4));
+                pro.setDescription(rs.getNString(5));
+                pro.setTotalSold(rs.getInt(6));
+                pro.setDateAdd(rs.getTimestamp(7));
+                pro.setDeleted(rs.getBoolean(8));
+                
+                // lấy images 
+                List<Image> listImg = LayImage(rs.getInt(1));
+                pro.getImgs().setListImg(listImg);
+                
+                return pro;
+            }
+        });
+    }
+    
     public List<Product> LayDanhSachProducts() {
         return template.query("select * from Product where deleted=0", new RowMapper<Product>() {
             public Product mapRow(ResultSet rs, int row) throws SQLException {
