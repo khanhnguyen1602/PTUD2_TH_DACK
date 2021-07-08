@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1:3306
--- Thời gian đã tạo: Th6 24, 2021 lúc 04:50 AM
+-- Thời gian đã tạo: Th7 08, 2021 lúc 04:36 AM
 -- Phiên bản máy phục vụ: 5.7.31
 -- Phiên bản PHP: 7.3.21
 
@@ -36,7 +36,17 @@ CREATE TABLE IF NOT EXISTS `cart` (
   PRIMARY KEY (`id`),
   KEY `FK_Cart_Product` (`idProduct`),
   KEY `FK_Cart_User` (`idUser`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `cart`
+--
+
+INSERT INTO `cart` (`id`, `idUser`, `idProduct`, `quantity`) VALUES
+(10, 2, 7, 6),
+(11, 2, 20, 2),
+(18, 2, 6, 7),
+(19, 2, 10, 1);
 
 -- --------------------------------------------------------
 
@@ -77,7 +87,16 @@ CREATE TABLE IF NOT EXISTS `discount` (
   `dateEnd` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_Discount_Product` (`idProduct`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `discount`
+--
+
+INSERT INTO `discount` (`id`, `idProduct`, `discountValue`, `dateBegin`, `dateEnd`) VALUES
+(4, 1, 5, '2021-06-28', '2021-07-05'),
+(5, 2, 10, '2021-06-28', '2021-07-02'),
+(6, 3, 5, '2021-06-27', '2021-07-10');
 
 -- --------------------------------------------------------
 
@@ -92,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `image` (
   `link` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_Image_Product` (`idProduct`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `image`
@@ -129,8 +148,8 @@ INSERT INTO `image` (`id`, `idProduct`, `link`) VALUES
 (28, 10, 'nktc1.jpg'),
 (29, 10, 'nktc2.jpg'),
 (30, 10, 'nktc3.jpg'),
-(31, 11, 'VH1.jpg'),
-(32, 12, 'VH2.jpg'),
+(31, 11, 'VH1-1.jpg'),
+(32, 12, 'VH2-1.jpg'),
 (33, 13, 'VH3-1.jpg'),
 (34, 13, 'VH3-2.jpg'),
 (35, 14, 'VH4-1.jpg'),
@@ -146,7 +165,19 @@ INSERT INTO `image` (`id`, `idProduct`, `link`) VALUES
 (45, 19, 'KN4-1.jpg'),
 (46, 19, 'KN4-2.jpg'),
 (47, 20, 'KN5-1.jpg'),
-(48, 20, 'KN5-2.jpg');
+(48, 20, 'KN5-2.jpg'),
+(49, 11, 'VH1-2.jpg'),
+(50, 11, 'VH1-3.jpg'),
+(51, 12, 'VH2-2.jpg'),
+(52, 12, 'VH2-3.jpg'),
+(53, 13, 'VH3-3.jpg'),
+(54, 14, 'VH4-3.jpg'),
+(55, 15, 'VH5-3.jpg'),
+(56, 16, 'KN1-3.jpg'),
+(57, 17, 'KN2-3.jpg'),
+(58, 18, 'KN3-3.jpg'),
+(59, 19, 'KN4-3.jpg'),
+(60, 20, 'KN5-3.jpg');
 
 -- --------------------------------------------------------
 
@@ -204,8 +235,8 @@ INSERT INTO `product` (`id`, `idCategory`, `productName`, `price`, `description`
 (6, 2, 'Mặt Nạ - Tiểu Thuyết', 51500, 'Đứng thứ 45 trong top 1000 Tiểu thuyết bán chạy', 25, '2021-06-23 05:43:57', 0),
 (7, 2, 'Méo - Tiểu Thuyết 12 Chòm Sao - Tập 2 (Tặng Kèm: 6 Postcard Nhân Vật)', 74000, 'Tác giả: Tiên Sắc Xám', 16, '2021-06-23 05:43:57', 0),
 (8, 2, 'Nhà Máy Sản Xuất Linh Hồn (Tiểu Thuyết)', 67500, 'Tác giả: Nguyễn Nguyên Phước', 7, '2021-06-23 05:43:57', 0),
-(9, 2, 'Đất Mồ Côi (Tiểu Thuyết)', 97500, 'Tác giả: Cổ Viên', 5, '2021-06-23 05:43:57', 0),
-(10, 2, 'Ngồi Khóc Trên Cây: Truyện Dài', 5900, 'Tác giả: Nguyễn Nhật Ánh', 20, '2021-06-23 05:43:57', 0),
+(9, 2, 'Đất Mồ Côi (Tiểu Thuyết)', 97500, 'Tác giả: Cổ Viên', 8, '2021-06-23 05:43:57', 0),
+(10, 2, 'Ngồi Khóc Trên Cây: Truyện Dài', 59000, 'Tác giả: Nguyễn Nhật Ánh', 25, '2021-06-23 05:43:57', 0),
 (11, 3, 'Bước Chậm Lại Giữa Thế Gian Vội Vã', 51000, 'Ra mắt lần đầu năm 2012, \r\nBước chậm lại giữa thế gian vội vã của \r\nĐại đức Hae Min đã liên tục đứng đầu danh sách \r\nbest-seller của nhiều trang sách trực tuyến uy tín của Hàn Quốc, \r\ntrở thành cuốn sách chữa lành cho hàng triệu người trẻ luôn tất bật với nhiều công việc', 1, '2021-06-24 03:05:05', 0),
 (12, 3, 'Chiến Binh Cầu Vồng', 98000, 'Tác phẩm đã bán được trên năm triệu bản, \r\nđược dịch ra 26 thứ tiếng, là một trong những đại diện xuất sắc nhất của văn học Indonesia hiện đại.', 10, '2021-06-24 03:05:05', 0),
 (13, 3, 'Giết Con Chim Nhại', 100000, 'Gần 50 năm từ ngày đầu ra mắt, \r\nGiết con chim nhại, tác phẩm đầu tay và cũng là cuối cùng của nữ nhà văn Mỹ Harper Lee vẫn đầy sức hút với độc giả ở nhiều lứa tuổi.', 15, '2021-06-24 03:05:05', 0),
@@ -235,7 +266,23 @@ CREATE TABLE IF NOT EXISTS `saleorder` (
   `dateCreated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `FK_SaleOrder_OrderStatus` (`idStatus`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `saleorder`
+--
+
+INSERT INTO `saleorder` (`id`, `idUser`, `idStatus`, `fullName`, `phone`, `address`, `total`, `dateCreated`) VALUES
+(1, 2, 1, 'Nguyen Huynh Phuong Khanh', '02253663874', 'Quan Go Vap, TPHCM', 2595000, '2021-06-27 13:32:21'),
+(2, 2, 1, 'Nguyen Huynh Phuong Khanh', '02253663874', 'Quan Go Vap, TPHCM', 2595000, '2021-06-27 13:33:10'),
+(3, 2, 1, 'Nguyen Huynh Phuong Khanh', '02253663874', 'Quan Go Vap, TPHCM', 2595000, '2021-06-27 13:33:24'),
+(4, 2, 1, 'Nguyen Huynh Phuong Khanh', '02253663874', 'Quan Go Vap, TPHCM', 2595000, '2021-06-27 13:33:57'),
+(5, 2, 1, 'Nguyen Huynh Phuong Khanh', '02253663874', 'Quan Go Vap, TPHCM', 2595000, '2021-06-27 13:34:15'),
+(6, 2, 1, 'Nguyen Huynh Phuong Khanh', '02253663874', 'Quan Go Vap, TPHCM', 2595000, '2021-06-27 13:39:06'),
+(7, 2, 1, 'Nguyen Huynh Phuong Khanh', '02253663874', 'Quan Go Vap, TPHCM', 2595000, '2021-06-27 13:39:16'),
+(8, 2, 1, 'Nguyen Huynh Phuong Khanh', '02253663874', 'Quan Go Vap, TPHCM', 2595000, '2021-06-27 13:41:09'),
+(9, 3, 1, 'Nguyen Huynh Phuong Khanh', '02253663895', 'Quan Go Vap, TPHCM', 688500, '2021-06-28 06:23:35'),
+(10, 1, 1, 'Nguyen Huynh Phuong Khanh', '02253663874', 'Quan Go Vap, TPHCM', 587500, '2021-07-06 02:57:39');
 
 -- --------------------------------------------------------
 
@@ -253,7 +300,34 @@ CREATE TABLE IF NOT EXISTS `saleorderdetail` (
   PRIMARY KEY (`id`),
   KEY `FK_SaleOerderDetail_SaleOrder` (`idOrder`),
   KEY `FK_SaleOrderDetail_Product` (`idProduct`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `saleorderdetail`
+--
+
+INSERT INTO `saleorderdetail` (`id`, `idOrder`, `idProduct`, `quantity`, `price`) VALUES
+(1, 1, 15, 5, 54000),
+(2, 1, 18, 15, 155000),
+(3, 2, 15, 5, 54000),
+(4, 2, 18, 15, 155000),
+(5, 3, 15, 5, 54000),
+(6, 3, 18, 15, 155000),
+(7, 4, 15, 5, 54000),
+(8, 4, 18, 15, 155000),
+(9, 5, 15, 5, 54000),
+(10, 5, 18, 15, 155000),
+(11, 6, 15, 5, 54000),
+(12, 6, 18, 15, 155000),
+(13, 7, 15, 5, 54000),
+(14, 7, 18, 15, 155000),
+(15, 8, 15, 5, 54000),
+(16, 8, 18, 15, 155000),
+(17, 9, 9, 3, 97500),
+(18, 9, 6, 4, 51500),
+(19, 9, 20, 5, 38000),
+(20, 10, 10, 5, 59000),
+(21, 10, 9, 3, 97500);
 
 -- --------------------------------------------------------
 
@@ -270,7 +344,16 @@ CREATE TABLE IF NOT EXISTS `user` (
   `phone` varchar(11) NOT NULL,
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `phone`, `deleted`) VALUES
+(1, 'phuongkhanh', 'MTIz', 'phuongkhanh16022000@gmail.com', '0236652154', 0),
+(2, 'tienkhoa', 'MTIz', 'letienkhoa3@gmail.com', '0236663256', 0),
+(3, '18600127', 'MTIz', 'phuongkhanh16022000@gmail.com', '02253663895', 0);
 
 --
 -- Các ràng buộc cho các bảng đã đổ
