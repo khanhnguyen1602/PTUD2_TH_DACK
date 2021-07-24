@@ -61,7 +61,7 @@
                                 <img style="max-height: 130px; height: auto" src="<c:url value="/resources/Images/"/>${cart.product.imgs.listImg[0].link}" alt="product img">
                             </div>
                             <div class="cart_item_name_container">
-                                <div class="cart_item_name"><a href="#">${cart.product.productName}</a></div>
+                                <div class="cart_item_name"><a href="/sampleapp/product/details.html?idPro=${cart.product.id}">${cart.product.productName}</a></div>
                                 <div class="cart_item_edit"><a href="#">Edit Product</a></div>
                             </div>
                         </div>
