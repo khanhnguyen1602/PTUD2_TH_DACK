@@ -52,19 +52,21 @@
                         <img class="image-large" src="<c:url value="/resources/Images/"/>${p.imgs.listImg[0].link}" alt="img">
                     </div>
                     <div class="details_image_thumbnails d-flex flex-row align-items-start justify-content-between">
+                        <!-- hien thi img dau tien trong ds -->
                         <div class="details_image_thumbnail active" data-image="<c:url value="/resources/Images/"/>${p.imgs.listImg[0].link}"><img style="max-height:120px;" src="<c:url value="/resources/Images/"/>${p.imgs.listImg[0].link}" alt="img"></div>
-                            <c:set var="index" value="0" />
-                            <c:forEach var="i" items="${p.imgs.listImg}"> 
-                                <c:if test="${index != 0}" >
+                        <!-- hien thi cac img con lai -->    
+                        <c:set var="index" value="0" />
+                        <c:forEach var="i" items="${p.imgs.listImg}"> 
+                            <c:if test="${index != 0}" >
                                 <div class="details_image_thumbnail" data-image="<c:url value="/resources/Images/"/>${i.link}"><img style="max-height:120px;" src="<c:url value="/resources/Images/"/>${i.link}" alt="img"></div>
                                 </c:if>
                                 <c:set var="index" value="${index+1}" />
                             </c:forEach>
                             <c:choose>
                                 <c:when test="${countImg <= 4}">
-                                    <div  class="details_image_thumbnail" data-image="<c:url value="/resources/Images/"/>${i.link}"></div>
-                                </c:when>
-                            </c:choose>
+                                <div  class="details_image_thumbnail" data-image="<c:url value="/resources/Images/"/>${i.link}"></div>
+                            </c:when>
+                        </c:choose>
                     </div>
                 </div>
             </div>
