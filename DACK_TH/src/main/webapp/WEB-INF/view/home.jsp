@@ -82,7 +82,7 @@
                                     <div class="card">
                                         <img class="card-img-top" src="<c:url value="/resources/Images/${o.imgs.listImg[0].link}"/>" alt="Card image cap">
                                         <div class="card-body">
-                                            <h4 class="card-title show_txt"><a href="#" title="View Product">${o.productName}</a></h4>
+                                            <h4 class="card-title show_txt"><a href="/sampleapp/product/details.html?idPro=${o.id}" title="View Product">${o.productName}</a></h4>
                                             <div class="row">
                                                 <div class="col">
                                                     <p class="btn btn-danger btn-block">${o.price} $</p>

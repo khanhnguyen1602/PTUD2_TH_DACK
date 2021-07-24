@@ -120,6 +120,8 @@ public class CartController {
             int tinhtien = daoPro.TinhTien(c.getIdProduct());
             c.getProduct().setPrice(tinhtien);
         }
+        // hien thi so luong sp tren icon cart
+        map.addAttribute("daoCart", daoCart);
         map.addAttribute("listCart", listCart);
         return "checkout";
     }
