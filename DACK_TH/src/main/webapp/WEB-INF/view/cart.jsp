@@ -42,10 +42,10 @@
             <div class="col">
                 <!-- Column Titles -->
                 <div class="cart_info_columns clearfix">
-                    <div class="cart_info_col cart_info_col_product">Product</div>
-                    <div class="cart_info_col cart_info_col_price">Price</div>
-                    <div class="cart_info_col cart_info_col_quantity">Quantity</div>
-                    <div class="cart_info_col cart_info_col_total">Total</div>
+                    <div class="cart_info_col cart_info_col_product">Sản phẩm</div>
+                    <div class="cart_info_col cart_info_col_price">Giá</div>
+                    <div class="cart_info_col cart_info_col_quantity">Số lượng</div>
+                    <div class="cart_info_col cart_info_col_total">Thành tiền</div>
                 </div>
             </div>
         </div>
@@ -93,10 +93,10 @@
         <div class="row row_cart_buttons">
             <div class="col">
                 <div class="cart_buttons d-flex flex-lg-row flex-column align-items-start justify-content-start">
-                    <div class="button continue_shopping_button"><a href="/sampleapp/">Continue shopping</a></div>
+                    <div class="button continue_shopping_button"><a href="/sampleapp/">Tiếp tục mua sắm</a></div>
                     <div class="cart_buttons_right ml-lg-auto">
-                        <div class="button clear_cart_button"><a href="/sampleapp/cart/delete.html" onclick="return confirm('Bạn có chắc muốn xóa giỏ hàng?')">Clear cart</a></div>
-                        <div class="button update_cart_button"><a href="#">Update cart</a></div>
+                        <div class="button clear_cart_button"><a href="/sampleapp/cart/delete.html" onclick="return confirm('Bạn có chắc muốn xóa giỏ hàng?')">Xóa giỏ hàng</a></div>
+                        <div class="button update_cart_button"><a href="#">Cập nhật</a></div>
                     </div>
                 </div>
             </div>
@@ -106,20 +106,20 @@
 
                 <!-- Delivery -->
                 <div class="delivery">
-                    <div class="section_title">Shipping method</div>
-                    <div class="section_subtitle">Select the one you want</div>
+                    <div class="section_title">Phương thức giao hàng</div>
+                    <div class="section_subtitle">Chọn 1 phương thức mà bạn muốn</div>
                     <div class="delivery_options">
-                        <label class="delivery_option clearfix">Next day delivery
+                        <label class="delivery_option clearfix">Giao vào ngày mai
                             <input type="radio" name="radio">
                             <span class="checkmark"></span>
                             <span class="delivery_price">20000 đ</span>
                         </label>
-                        <label class="delivery_option clearfix">Standard delivery
+                        <label class="delivery_option clearfix">Giao hôm nay
                             <input type="radio" name="radio">
                             <span class="checkmark"></span>
                             <span class="delivery_price">10000 đ</span>
                         </label>
-                        <label class="delivery_option clearfix">Personal pickup
+                        <label class="delivery_option clearfix">Giao trong 2-3 ngày
                             <input type="radio" checked="checked" name="radio">
                             <span class="checkmark"></span>
                             <span class="delivery_price">Free</span>
@@ -147,7 +147,7 @@
                     <div class="cart_total_container">
                         <ul>
                             <li class="d-flex flex-row align-items-center justify-content-start">
-                                <div class="cart_total_title">Subtotal</div>
+                                <div class="cart_total_title">Tổng tiền SP</div>
                                 <div class="cart_total_value ml-auto">${subtotal} đ</div>
                             </li>
                             <li class="d-flex flex-row align-items-center justify-content-start">
@@ -155,16 +155,16 @@
                                 <div class="cart_total_value ml-auto">Free</div>
                             </li>
                             <li class="d-flex flex-row align-items-center justify-content-start">
-                                <div class="cart_total_title">Total</div>
+                                <div class="cart_total_title">Tổng</div>
                                 <div class="cart_total_value ml-auto">${subtotal} đ</div>
                             </li>
                         </ul>
                     </div>
                     <c:if test="${subtotal > 0}">
-                        <div class="button checkout_button"><a href="/sampleapp/cart/showcheckout.html">Proceed to checkout</a></div>
+                        <div class="button checkout_button"><a href="/sampleapp/cart/showcheckout.html">Xử lý thanh toán</a></div>
                     </c:if>
                     <c:if test="${subtotal == 0}">
-                        <div class="button checkout_button"><a href="#">Proceed to checkout</a></div>
+                        <div class="button checkout_button"><a href="#">Xử lý thanh toán</a></div>
                     </c:if>
                 </div>
             </div>

@@ -55,6 +55,8 @@ public class CartController {
         }
         map.addAttribute("listCart", listCart);
         map.addAttribute("idUser", idUser);
+        // hien thi so luong sp tren icon cart
+        map.addAttribute("daoCart", daoCart);
 //        session.setAttribute("cartNum", listCart.size());
         return "cart";
         

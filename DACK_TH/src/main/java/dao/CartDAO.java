@@ -71,6 +71,17 @@ public class CartDAO {
         }
     }
     
+    public int DemCart(int idUser)
+    {
+        int count = 0;
+        List<Cart> listCart = LayDanhSachCartCuaUser(idUser);
+        if(listCart.size()>0)
+        {
+            count = listCart.size();
+        }
+        return count;
+    }
+    
     public int AddCart(Cart c)
     {
         String sql = String.format("insert into cart (idUser, idProduct, quantity) values (%d,%d,%d)", c.getIdUser(), c.getIdProduct(), c.getQuantity());

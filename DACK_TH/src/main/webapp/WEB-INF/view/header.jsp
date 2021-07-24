@@ -44,7 +44,8 @@
                                 <a style="float: end" class="btn btn-outline-success" type="submit" href="/sampleapp/user/logout.html">Logout</a>
                                 <a class="btn btn-success btn-sm ml-3" href="/sampleapp/cart.html">
                                     <i class="fa fa-shopping-cart"></i> Cart
-                                    <span class="badge badge-light"></span>
+                                    <c:set var="countProInCart" value="${daoCart.DemCart(sessionScope.userId)}" />
+                                    <span class="badge badge-light">${countProInCart}</span>
                                 </a>
                                 
                             </c:if>

@@ -5,6 +5,7 @@
  */
 package controller;
 
+import dao.CartDAO;
 import dao.ProductDAO;
 import dao.UserDAO;
 import java.util.ArrayList;
@@ -33,6 +34,9 @@ public class ProductController {
     @Autowired
     ProductDAO daoPro;
     
+    @Autowired
+    CartDAO daoCart;
+    
     @RequestMapping(value = "/product/list")
     public String LayDanhSachProducts(ModelMap map){
         logger.info("Lay ds product");
@@ -59,6 +63,8 @@ public class ProductController {
         int countImage = listImg.size();
         map.addAttribute("p", p);
         map.addAttribute("daoPro", daoPro);
+        // hien thi so luong sp tren icon cart
+        map.addAttribute("daoCart", daoCart);
         map.addAttribute("countImg", countImage);
         return "productDetails";
         
@@ -72,7 +78,8 @@ public class ProductController {
         
         map.addAttribute("listTopSeller", lstTopSeller);
         map.addAttribute("listNews", lstNews);
-        map.addAttribute("daoKH", daoPro);
+//        map.addAttribute("daoKH", daoPro);
+         map.addAttribute("daoCart", daoCart);
         for(Product p: lstTopSeller)
         {
             System.out.println("Name: " + p.getProductName());
