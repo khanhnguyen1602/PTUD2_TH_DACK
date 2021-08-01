@@ -13,6 +13,28 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/"/>styles/cart.css">
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/"/>styles/cart_responsive.css">
 
+<style>
+    .btnCapNhat{
+        color: black;
+        background: none;
+        width: 68%;
+/*        margin-top: 83px;
+        margin-left: 15%;*/
+        height: 61px;
+        text-align: center;
+        border: solid 2px #1b1b1b;
+        overflow: hidden;
+        cursor: pointer;
+        font-size: 17px;
+        font-weight: 600;
+    }
+    .btnCapNhat:hover{
+        color: white;
+        background: black;
+        border: double;
+    }
+</style>
+
 <!-- Home -->
 
 <div class="home">
@@ -49,58 +71,64 @@
                 </div>
             </div>
         </div>
-        <div class="row cart_items_row">
-            <div class="col">
-                <c:set var="subtotal" value="0" />
-                <c:forEach var="cart" items="${listCart}">
-                    <!-- Cart Item -->
-                    <div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
-                        <!-- Name -->
-                        <div class="cart_item_product d-flex flex-row align-items-center justify-content-start">
-                            <div class="cart_item_image">
-                                <img style="max-height: 130px; height: auto" src="<c:url value="/resources/Images/"/>${cart.product.imgs.listImg[0].link}" alt="product img">
+        <form action="/sampleapp/cart/update.html" method="POST" >
+            <div class="row cart_items_row">
+                <div class="col">
+                    <c:set var="subtotal" value="0" />
+                    <c:forEach var="cart" items="${listCart}">
+                        <!-- Cart Item -->
+                        <div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
+                            <!-- Name -->
+                            <div class="cart_item_product d-flex flex-row align-items-center justify-content-start">
+                                <div class="cart_item_image">
+                                    <img style="max-height: 130px; height: auto" src="<c:url value="/resources/Images/"/>${cart.product.imgs.listImg[0].link}" alt="product img">
+                                </div>
+                                <div class="cart_item_name_container">
+                                    <div class="cart_item_name"><a href="/sampleapp/product/details.html?idPro=${cart.product.id}">${cart.product.productName}</a></div>
+                                    <div class="cart_item_edit"><a href="/sampleapp/cart/deleteProduct.html?idPro=${cart.product.id}" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?')"><span style="color:red">Xóa</span></a></div>
+                                </div>
                             </div>
-                            <div class="cart_item_name_container">
-                                <div class="cart_item_name"><a href="/sampleapp/product/details.html?idPro=${cart.product.id}">${cart.product.productName}</a></div>
-                                <div class="cart_item_edit"><a href="#">Edit Product</a></div>
-                            </div>
-                        </div>
-                        <!-- Price -->
-                        <div class="cart_item_price">${cart.product.price} đ</div>
-                        <!-- Quantity -->
-                        <div class="cart_item_quantity">
-                            <div class="product_quantity_container">
-                                <div class="product_quantity clearfix">
-                                    <span>Qty</span>
-                                    <input id="quantity_input" name="quantity" type="text" pattern="[0-9]*" value="${cart.quantity}">
-                                    <div class="quantity_buttons">
-                                        <div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>
-                                        <div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
+                            <!-- Price -->
+                            <div class="cart_item_price">${cart.product.price} đ</div>
+                            <!-- Quantity -->
+                            <div class="cart_item_quantity">
+                                <div class="product_quantity_container">
+                                    <div class="product_quantity clearfix">
+                                        <span>Qty</span>
+                                        <input id="quantity_input" name="quantity" type="text" pattern="[0-9]*" value="${cart.quantity}">
+                                        <div class="quantity_buttons">
+                                            <div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>
+                                            <div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- Total -->
+                            <c:set var="total" value="${cart.product.price * cart.quantity}" />
+                            <c:set var="subtotal" value="${subtotal + total}" />
+                            <div class="cart_item_total">
+                                ${total} đ 
+                            </div>
                         </div>
-                        <!-- Total -->
-                        <c:set var="total" value="${cart.product.price * cart.quantity}" />
-                        <c:set var="subtotal" value="${subtotal + total}" />
-                        <div class="cart_item_total">${total} đ</div>
-                    </div>
-                </c:forEach>
-                
+                    </c:forEach>
 
+
+                </div>
             </div>
-        </div>
-        <div class="row row_cart_buttons">
-            <div class="col">
-                <div class="cart_buttons d-flex flex-lg-row flex-column align-items-start justify-content-start">
-                    <div class="button continue_shopping_button"><a href="/sampleapp/">Tiếp tục mua sắm</a></div>
-                    <div class="cart_buttons_right ml-lg-auto">
-                        <div class="button clear_cart_button"><a href="/sampleapp/cart/delete.html" onclick="return confirm('Bạn có chắc muốn xóa giỏ hàng?')">Xóa giỏ hàng</a></div>
-                        <div class="button update_cart_button"><a href="#">Cập nhật</a></div>
+            <div class="row row_cart_buttons">
+                <div class="col">
+                    <div class="cart_buttons d-flex flex-lg-row flex-column align-items-start justify-content-start">
+                        <div class="button continue_shopping_button"><a href="/sampleapp/">Tiếp tục mua sắm</a></div>
+                        <div class="cart_buttons_right ml-lg-auto">
+                            <div class="button clear_cart_button"><a href="/sampleapp/cart/delete.html" onclick="return confirm('Bạn có chắc muốn xóa giỏ hàng?')">Xóa giỏ hàng</a></div>
+                            <!--<div class="button update_cart_button"><a href="#">Cập nhật</a></div>-->
+                            <button class=" btnCapNhat" type="submit" >Cập nhật</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
+        
         <div class="row row_extra">
             <div class="col-lg-4">
 

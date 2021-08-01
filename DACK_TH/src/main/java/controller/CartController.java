@@ -103,7 +103,44 @@ public class CartController {
         int idUser = Integer.parseInt(session.getAttribute("userId").toString());
         logger.info("Xoa gio hang");
         int deleted = daoCart.XoaCartByIdUser(idUser);
-//        session.setAttribute("cartNum", 0);
+        return String.format("redirect:/cart.html");
+        
+    }
+    
+    @RequestMapping(value = "/cart/update", method = RequestMethod.POST)
+    public String UpdateCart(HttpServletRequest request, @RequestParam("quantity") int[] quantity){
+        HttpSession session = request.getSession();
+        int idUser = Integer.parseInt(session.getAttribute("userId").toString());
+        logger.info("Update gio hang");
+        List<Cart> listCart = daoCart.LayDanhSachCartCuaUser(idUser);
+        for(int i=0; i<quantity.length; i++)
+        {
+            // neu sl = 0 thi xoa sp
+            if(quantity[i] == 0)
+            {
+                int deleted = daoCart.XoaProductInCart(idUser, listCart.get(i).getIdProduct());
+            }
+            else
+            {
+                // neu sl != 0 va sl nhap != sl trong db thi cap nhat
+                if(listCart.get(i).getQuantity() != quantity[i])
+                {
+                    int updated = daoCart.UpdateQuantity(quantity[i], listCart.get(i).getId());
+                }
+            }
+            
+        }
+        
+        return String.format("redirect:/cart.html");
+        
+    }
+    
+    @RequestMapping(value = "/cart/deleteProduct", method = RequestMethod.GET)
+    public String DeleteProductInCart(HttpServletRequest request, @RequestParam("idPro") int idPro){
+        HttpSession session = request.getSession();
+        int idUser = Integer.parseInt(session.getAttribute("userId").toString());
+        logger.info("Xoa sp trong gio hang");
+        int deleted = daoCart.XoaProductInCart(idUser, idPro);
         return String.format("redirect:/cart.html");
         
     }

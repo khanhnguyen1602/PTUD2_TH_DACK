@@ -117,6 +117,12 @@ public class CartDAO {
         return template.update(sql);
     }
     
+    public int XoaProductInCart(int idUser, int idPro)
+    {
+        String sql = String.format("delete from cart where idUser=%d and idProduct=%d", idUser, idPro);
+        return template.update(sql);
+    }
+    
     public int AddSaleOrderdetail(SaleOrderDetail detail)
     {
         String sql = String.format("insert into saleorderdetail(idOrder, idProduct, quantity, price) values (%d,%d,%d,%d)", 
